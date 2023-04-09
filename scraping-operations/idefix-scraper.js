@@ -16,7 +16,7 @@ async function getBookPriceFromIdefix(books) {
       const $ = cheerio.load(response.data);
 
       const bookPrices = $('#prices').text();
-      const firstPrice = bookPrices.split('TL')[0];
+      const firstPrice = bookPrices.split(' TL')[0];
       books[i].price = firstPrice;
 
       progressBar.update(i);

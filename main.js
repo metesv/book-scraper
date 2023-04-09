@@ -1,5 +1,6 @@
 const path = require('path');
 const readCsvFileAsync = require('./file-operations/read-csv.js');
+const writeCsvFileSync = require('./file-operations/write-csv.js');
 const getBooksFromGoogleApi = require('./http-operations/get-books-from-google-api.js');
 const getBookPriceFromIdefix = require('./scraping-operations/idefix-scraper.js');
 
@@ -8,6 +9,7 @@ async function main() {
   const booksJson = await readCsvFileAsync(filePath);
   const booksFromGoogleApi = await getBooksFromGoogleApi(booksJson);
   const booksWithPrice = await getBookPriceFromIdefix(booksFromGoogleApi);
+  await writeCsvFileSync(booksWithPrice);
 }
 
 main();
