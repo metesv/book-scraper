@@ -8,6 +8,10 @@ async function getBooksFromGoogleApi(books) {
   progressBar.start(books.length, 0);
 
   for (let i = 0; i < books.length; i++) {
+    if (books[i].isbn13 && books[i].authors && books[i].title) {
+      continue;
+    }
+
     const bookIdentifier = books[i]?.isbn13?.length > 0
       ? books[i].isbn13
       : `${books[i].authors} ${books[i].title}`
