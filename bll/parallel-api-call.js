@@ -1,3 +1,4 @@
+const getBookPriceFromDr = require('../scraping-operations/dr-scraper.js');
 const getBookPriceFromIdefix = require('../scraping-operations/idefix-scraper.js');
 
 async function makeParallelApiCall(booksArray) {
@@ -8,7 +9,7 @@ async function makeParallelApiCall(booksArray) {
   try {
     const [response1, response2] = await Promise.all([
       getBookPriceFromIdefix(firstHalf),
-      getBookPriceFromIdefix(secondHalf)
+      getBookPriceFromDr(secondHalf)
     ]);
 
     const jsonData1 = Object.values(response1);
