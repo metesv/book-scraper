@@ -12,7 +12,6 @@ async function getBookPriceFromDr(books) {
       const $ = cheerio.load(response.data);
 
       const bookPrices = $("[data-price]").text().replace(/ |\n/g, '');
-      console.log(bookPrices);
       const firstPrice = bookPrices.split('TL')[0];
       books[i].price = firstPrice;
     }
