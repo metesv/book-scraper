@@ -1,7 +1,11 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const cliProgress = require('cli-progress');
 
 async function getBookPriceFromIdefix(books) {
+  const progressBar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+  progressBar.start(books.length, 0);
+
   try {
     for (let i = 0; i < books.length; i++) {
       let query = books[i].isbn13.length > 0
@@ -15,8 +19,9 @@ async function getBookPriceFromIdefix(books) {
       const firstPrice = bookPrices.split('TL')[0];
       books[i].price = firstPrice;
 
-      console.log(books[i]);
+      progressBar.update(i);
     }
+    progressBar.stop();
 
     return books;
   } catch (error) {

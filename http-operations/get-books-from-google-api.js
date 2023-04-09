@@ -8,7 +8,7 @@ async function getBooksFromGoogleApi(books) {
   progressBar.start(books.length, 0);
 
   for (let i = 0; i < books.length; i++) {
-    const bookIdentifier = books[i].isbn13.length > 0
+    const bookIdentifier = books[i]?.isbn13?.length > 0
       ? books[i].isbn13
       : `${books[i].authors} ${books[i].title}`
 
@@ -27,8 +27,7 @@ async function getBooksFromGoogleApi(books) {
 
       progressBar.update(i);
     } catch (error) {
-      console.log('Broken entry!!!');
-      console.table(books[i]);
+      console.log(books[i]);
     }
   }
 
